@@ -1,0 +1,7 @@
+view full premium content:
+  title: 'View full premium content'
+  description: 'Grant user access to view premium content.'
+administer exercise2:
+  title: 'Administer Exercise2 Settings'
+  description: 'Access the Exercise2 administrative settings page.'
+  restrict access: true

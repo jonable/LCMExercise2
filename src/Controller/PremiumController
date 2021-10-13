@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file
+ * Contains \Drupal\exercise1\Controller\PremiumController.
+ */
+namespace Drupal\exercise1\Controller;
+
+use Drupal\Core\Controller\ControllerBase;
+
+
+class PremiumController extends ControllerBase{
+
+
+    public function content(){
+    
+    }
+}

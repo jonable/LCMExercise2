@@ -1,0 +1,12 @@
+exercise2.admin_settings:
+  title: 'Exercise2 Settings'
+  description: 'Settings for Exercise2 module'
+  route_name: exercise2.admin_settings
+  parent: system.admin_config
+  weight: 100
+exercise2.admin_settings_child:
+  title: 'Premium Settings'
+  parent: exercise2.admin_settings
+  description: 'Edit premium content settings.'
+  route_name: exercise2.admin_settings
+  weight: 101

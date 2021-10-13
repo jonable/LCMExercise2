@@ -1,0 +1,6 @@
+name: Exercise 2
+type: module
+description: ''
+package: Exercises
+core_version_requirement: ^9
+configure: exercise2.admin_settings

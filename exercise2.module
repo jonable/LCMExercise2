@@ -1,0 +1,56 @@
+<?php
+/**
+ * @file
+ * Exercise2 Module hooks.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\views\ViewExecutable;
+
+
+/**
+ * Implement hook_ENTITY_VIEW_alter().
+ */
+
+function exercise2_node_view_alter(array &$build, 
+    Drupal\Core\Entity\EntityInterface $entity, 
+    \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+
+
+    // checks
+        // view_mode is full 
+        // field_is_premium is set and is true
+        // user has role "premium" 
+        // if user does not have role or permission then show summary.
+
+    if($build['#view_mode'] == 'full'){
+        $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());    
+        // use settings to display button and user defined text.
+        if($entity->hasField('field_is_premium') 
+            && $entity->field_is_premium->value == true
+            && (! $user->hasRole("premium") || ! $user->hasPermission('view full premium content')) )
+        {
+            $build['body'][0]["#text"] = $entity->body->summary;
+            $config = \Drupal::config('exercise2.settings');            
+            
+            $url = "";
+            $paywall_notice = t($config->get("paywall_notice"));
+            $markup = NULL;
+            // create markup for paywall notice and link.
+            if(! empty($config->get('paywall_link'))){
+                $url = $config->get('paywall_link');
+                $url = Drupal\Core\Url::fromUri($url);
+                // $url = Drupal\Core\Url::fromUri('user.login');
+                $markup = Drupal\Core\Link::fromTextAndUrl($paywall_notice, $url);
+                $markup = $markup->toRenderable();
+            }else{
+                $markup = [
+                    '#prefix'=>'<strong>',
+                    '#suffix'=>'</strong>',
+                    '#markup'=>$paywall_notice 
+                ];                
+            }
+            array_push($build['body'], $markup);
+        }
+    }
+}

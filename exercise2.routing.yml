@@ -1,0 +1,7 @@
+exercise2.admin_settings:
+  path: '/admin/config/content/exercise2'
+  defaults:
+    _form: '\Drupal\exercise2\Form\PaywallSettingsForm'
+    _title: 'Paywall Settings'
+  requirements:
+    _permission: 'administer exercise2'
